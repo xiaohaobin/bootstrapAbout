@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!-- IE -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- 设置 viewport -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 兼容国产浏览器的高速模式 -->
+		<meta name="renderer" content="webkit">
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<title></title>
+		<!--[if lt IE 9]>
+	      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-editable.css" />
+	</head>
+
+	<body>
+		<div class="container">
+			
+			<div class="row">
+				<h2>普通文本框</h2>
+				<a href="#" id="username">用户名</a>
+			</div>
+
+			<div class="row">
+				<h2>下拉菜单</h2>
+				<a href="#" id="department">选择部门</a>
+			</div>
+			
+			<div class="row">
+				<h2>值验证和拼接字符</h2>
+				<a id="price" data-type="text" data-value="100" href="#"></a>
+			</div>
+			 
+			 <div class="row">
+			 	<h2>复选框</h2>
+			 	<a href="#" id="checkList">兴趣</a>
+			 </div>
+		</div>
+
+		<script src="../../lib/jquery/1.9.1/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap-editable.min.js" type="text/javascript" charset="utf-8"></script>
+		   
+   
+		<script type="text/javascript">
+			$(function() {
+				
+				//文本编辑
+				$('#username').editable({
+					type: "text", //编辑框的类型。支持text|textarea|select|date|checklist等
+					title: "用户名", //编辑框的标题
+					disabled: false, //是否禁用编辑
+					emptytext: "空文本", //空值的默认文本
+					mode: "inline", //编辑框的模式：支持popup和inline两种模式，默认是popup
+					validate: function(value) { //字段验证
+						if(!$.trim(value)) {
+							return '不能为空';
+						}
+					},
+					placeholder:"wrnmmp",//占位符
+					inputclass:"mmp",//自定义类名
+//					tpl:'<input type="email">',//修改控件模板
+				});
+				
+				
+				
+				
+				//select编辑
+				$('#department').editable({
+					type: "select", //编辑框的类型。支持text|textarea|select|date|checklist等
+					source: [{
+						value: 1,
+						text: "开发部"
+					}, {
+						value: 2,
+						text: "销售部"
+					}, {
+						value: 3,
+						text: "行政部"
+					}],
+					title: "选择部门", //编辑框的标题
+					disabled: false, //是否禁用编辑
+					emptytext: "空文本", //空值的默认文本
+					mode: "popup", //编辑框的模式：支持popup和inline两种模式，默认是popup
+					validate: function(value) { //字段验证
+						if(!$.trim(value)) {
+							return '不能为空';
+						}
+					},
+					name: "mmp", //字段的名称。将在服务器上提交。可以从id属性中获取
+					placement: "bottom", //容器相对于元素的放置。left,right,bottom,top
+					url: "/post", //请求url
+					pk: 1,
+					error: function(response, newValue) {//请求错误回调
+						if(response.status === 500) {
+//							alert('服务器错误');
+							return '服务器错误';
+						} else {
+							alert(response.responseText);
+							return response.responseText;
+						}
+					},
+					ajaxOptions: {//ajax请求设置
+				        type: 'post',
+				        dataType: 'json'
+				    },
+//				    success: function(response, newValue) {//修改请求成功的回调
+//				       
+//				    },
+				});
+				
+				
+				//值验证和拼接字符
+				$('#price').editable({
+					validate: function(value){
+						var re = /^\d+(?=\.{0,1}\d+$|$)/;
+						if(!$.trim(value)) {
+							return '不能为空';
+						}
+					    if (value != "") { 
+					        if (!re.test(value)) { 
+					            return "请输入正确的数字";
+					        } 
+					    } 
+					},
+			        display: function(value) {
+			          $(this).text(value + '$');
+			        }, 
+			    });
+			    
+			    
+			    //复选框列表
+			    $("#checkList").editable({
+			    	type: "checklist",
+                    separator:",",
+                    source: [
+                    	{ value: 'bsb', text: '篮球' },
+                        { value: 'ftb', text: '足球' },
+                        { value: 'wsm', text: '游泳' }
+                    ],
+			    });
+			});
+		</script>
+	</body>
+
+</html>

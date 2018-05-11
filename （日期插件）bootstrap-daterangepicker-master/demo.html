@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">
+		<link rel="stylesheet" type="text/css" media="all" href="daterangepicker.css" />
+		<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+		<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
+		<script type="text/javascript" src="moment.js"></script>
+		<script type="text/javascript" src="daterangepicker.js"></script>
+	</head>
+
+	<body>
+		<div class="container">
+
+			<form class="form-inline">
+				<div class="form-group">
+					<input type="text" id="config-demo" class="form-control">
+				</div>
+				<div class="checkbox">
+					<label>
+				      <input type="checkbox" class="" id="isSingleDatePicker" checked="checked"/>是否单日期
+				    </label>
+				</div>
+			</form>
+
+		</div>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				
+				//日期配置
+				var option = {
+					singleDatePicker: true, //是否显示单个日期选择器
+					showDropdowns: true, //是否显示月份、年份下拉框
+					dateLimit: {
+						"days": 7
+					},
+					timePicker: true, //是否显示时间（时分）选择器
+					timePicker24Hour: true, //是否24小时制度
+					timePickerSeconds: true, //是否显示秒
+					endDate: new Date(), //限制最小日期
+					maxDate: new Date(), //限制最大日期
+					locale: { //转化为中文配置
+						format: "YYYY-MM-DD HH:mm:ss", //显示格式
+						applyLabel: '确认',
+						cancelLabel: '取消',
+						fromLabel: '从',
+						toLabel: '到',
+						weekLabel: 'W',
+						customRangeLabel: 'Custom Range',
+						daysOfWeek: ["日", "一", "二", "三", "四", "五", "六"],
+						monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+					}
+				};
+
+				//初始化日期
+
+				$('#config-demo').daterangepicker(
+					option,
+					function(start, end, label) {
+						console.log(start, end, label);
+						alert('回调: ' + start.format('YYYY-MM-DD HH:MM:SS') + ' to ' + end.format('YYYY-MM-DD'));
+						console.log(
+							"开始时间：" + formatDateTime(start._d),
+							"结束时间：" + formatDateTime(end._d)
+						);
+					}
+				);
+				
+				//切换单选双选日期
+				$("#isSingleDatePicker").change(function(){
+					console.log($(this).prop("checked"));
+					option.singleDatePicker = $(this).prop("checked");
+					$('#config-demo').daterangepicker(option);
+				});
+				
+				//标准时间返回 y-m-d h:m:s格式
+				function formatDateTime(date) {
+					var y = date.getFullYear();
+					var m = date.getMonth() + 1;
+					m = m < 10 ? ('0' + m) : m;
+					var d = date.getDate();
+					d = d < 10 ? ('0' + d) : d;
+					var h = date.getHours();
+					h = h < 10 ? ('0' + h) : h;
+					var minute = date.getMinutes();
+					minute = minute < 10 ? ('0' + minute) : minute;
+					var second = date.getSeconds();
+					second = second < 10 ? ('0' + second) : second;
+					return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+				};
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!-- IE -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- 设置 viewport -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 兼容国产浏览器的高速模式 -->
+		<meta name="renderer" content="webkit">
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<title></title>
+		<!--[if lt IE 9]>
+	      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-editable.css" />
+		<link rel="stylesheet" type="text/css" href="src/inputs-ext/wysihtml5/bootstrap-wysihtml5-0.0.2/bootstrap-wysihtml5-0.0.2.css"/>
+	</head>
+
+	<body>
+		<div class="container">
+			
+			<div id="comments" data-type="wysihtml5" data-pk="1"><h2>awesome</h2> comment!</div>
+
+		</div>
+
+		<script src="../../lib/jquery/1.9.1/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap-editable.min.js" type="text/javascript" charset="utf-8"></script>
+		 
+		<script src="src/inputs-ext/wysihtml5/bootstrap-wysihtml5-0.0.2/wysihtml5-0.3.0.min.js" type="text/javascript" charset="utf-8"></script>
+   		<script src="src/inputs-ext/wysihtml5/bootstrap-wysihtml5-0.0.2/bootstrap-wysihtml5-0.0.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function() {
+				
+				$('#comments').editable({
+//			        url: '/post',
+//			        error: function(response, newValue) {//请求错误回调
+//						if(response.status === 500) {
+////							alert('服务器错误');
+//							return '服务器错误';
+//						} else {
+//							alert(response.responseText);
+//							return response.responseText;
+//						}
+//					},
+			        title: 'Enter comments',
+			        placement: "bottom", //容器相对于元素的放置。left,right,bottom,top
+			    });
+			});
+		</script>
+	</body>
+
+</html>

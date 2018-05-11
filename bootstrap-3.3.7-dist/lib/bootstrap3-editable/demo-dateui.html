@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!-- IE -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- 设置 viewport -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 兼容国产浏览器的高速模式 -->
+		<meta name="renderer" content="webkit">
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<title></title>
+		<!--[if lt IE 9]>
+	      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-editable.css" />
+		
+		
+	</head>
+
+	<body>
+		<div class="container">
+			
+			<a href="#" id="dob" data-type="date" data-pk="1" data-url="/post" data-title="Select date">15/05/1984</a>
+
+		</div>
+
+		<script src="../../lib/jquery/1.9.1/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap-editable.min.js" type="text/javascript" charset="utf-8"></script>
+		 
+		<script src="src/inputs/dateui/dateui.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			$(function(){
+			    $('#dob').editable({
+			        format: 'yyyy-mm-dd',    
+			        viewformat: 'dd/mm/yyyy',    
+			        datepicker: {
+			                firstDay: 1
+			        },
+			        placement: "bottom", //容器相对于元素的放置。left,right,bottom,top
+			        url: "/post", //请求url
+					pk: 1,
+					error: function(response, newValue) {//请求错误回调
+						if(response.status === 500) {
+//							alert('服务器错误');
+							return '服务器错误';
+						} else {
+							alert(response.responseText);
+							return response.responseText;
+						}
+					},
+			    });
+			});
+		</script>
+	</body>
+
+</html>

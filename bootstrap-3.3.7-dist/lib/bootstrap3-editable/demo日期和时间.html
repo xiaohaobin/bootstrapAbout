@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!-- IE -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- 设置 viewport -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 兼容国产浏览器的高速模式 -->
+		<meta name="renderer" content="webkit">
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<title></title>
+		<!--[if lt IE 9]>
+	      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-editable.css" />
+		<link rel="stylesheet" type="text/css" href="src/inputs/datetime/bootstrap-datetimepicker/css/datetimepicker.css"/>
+	</head>
+
+	<body>
+		<div class="container">
+			
+			
+			<div class="row">
+				<h2>选择器委托+时间</h2>
+				<ul class="list-group">
+					<li class="list-group-item"><a href="#">2018-12-03</a></li>
+					<li class="list-group-item"><a href="#">2018-05-08</a></li>
+					<li class="list-group-item"><a href="#">2018-10-19 12:12:12</a></li>
+				</ul>
+			</div>
+			<div>
+				<h2>精确到时分</h2>
+				<a href="#" id="dateTime">2018-10-19 12:12:12</a>
+			</div>
+			 
+		</div>
+
+		<script src="../../lib/jquery/1.9.1/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap-editable.min.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="src/inputs/datetime/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+		   
+   
+		<script type="text/javascript">
+			$(function() {
+				
+				
+				
+				//日期编辑
+				$("ul").editable({
+					selector: 'a',
+					type:'date',
+					placement: "right",
+				});
+				
+				$("#dateTime").editable({
+					type:'datetime',
+					placement: "right",
+				});
+			});
+		</script>
+	</body>
+
+</html>
